@@ -156,6 +156,7 @@ namespace RequestAADSamlRefreshToken
             }
 
             Console.WriteLine("[+] WOOOOO Have a nice day!");
+            return;
         }
     }
 }
