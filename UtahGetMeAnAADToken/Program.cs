@@ -145,8 +145,9 @@ namespace RequestAADSamlRefreshToken
                     }
                     else
                     {
-                        Console.WriteLine($"[!]    This did exactly SQUAT! No cookies received\n");
-                        Console.WriteLine($"[!]    Did you at least catch your first tube today?\n");
+                        Console.WriteLine($"[!]    This did exactly SQUAT! No cookies received");
+                        Console.WriteLine($"[!]    Make sure you are running this from an Azure AD-joined machine");
+                        Console.WriteLine($"[!]    Did you at least catch your first tube today?");
                     }
                 }
             }
