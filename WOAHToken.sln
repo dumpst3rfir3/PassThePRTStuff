@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.35325.158
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WOAHToken", "WOAHToken\WOAHToken.csproj", "{352DF1F0-D257-4384-8AF3-CFC3DB94FF77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UtahGetMeAnAADToken", "UtahGetMeAnAADToken\UtahGetMeAnAADToken.csproj", "{B5A36FB4-8973-4548-ADF3-24561E4B88A0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{352DF1F0-D257-4384-8AF3-CFC3DB94FF77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{352DF1F0-D257-4384-8AF3-CFC3DB94FF77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{352DF1F0-D257-4384-8AF3-CFC3DB94FF77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{352DF1F0-D257-4384-8AF3-CFC3DB94FF77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5A36FB4-8973-4548-ADF3-24561E4B88A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5A36FB4-8973-4548-ADF3-24561E4B88A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5A36FB4-8973-4548-ADF3-24561E4B88A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5A36FB4-8973-4548-ADF3-24561E4B88A0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7B73BB24-DFB7-4D26-963D-DB62ADC97FCB}
+	EndGlobalSection
+EndGlobal
