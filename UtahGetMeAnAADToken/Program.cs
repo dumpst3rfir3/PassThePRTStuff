@@ -94,11 +94,31 @@ namespace RequestAADSamlRefreshToken
 
     class Program
     {
-        static async Task Main(string[] args)
+
+        public static async Task<string> getNonce(string tenantID)
+        {
+            string url = "https://login.microsoftonline.com/" + tenantID + "/oauth2/token";
+            HttpClient client = new HttpClient();
+            var reqData = new Dictionary<string, string>
+            {
+                {"grant_type", "srv_challenge" }
+            };
+            var reqBody = new FormUrlEncodedContent(reqData);
+
+            var response = await client.PostAsync(url, reqBody);
+
+            var resBody = await response.Content.ReadAsStringAsync();
+
+            jsonResponse j = JsonConvert.DeserializeObject<jsonResponse>(resBody);
+            Console.WriteLine("[+] Received nonce: " + j.Nonce);
+            return j.Nonce;
+        }
+
+        static void Main(string[] args)
         {
             try
             {
-                string tenantID;
+                string tenantID, nonce;
                 if (args.Length > 0)
                 {
                     tenantID = args[0];
@@ -108,22 +128,10 @@ namespace RequestAADSamlRefreshToken
                     tenantID = "00000000-0000-0000-0000-000000000000";
                 }
 
-                string url = "https://login.microsoftonline.com/" + tenantID + "/oauth2/token";
-                HttpClient client = new HttpClient();
-                var reqData = new Dictionary<string, string>
-            {
-                {"grant_type", "srv_challenge" }
-            };
-                var reqBody = new FormUrlEncodedContent(reqData);
+                Task<string> nonceTask = getNonce(tenantID);
+                nonce = nonceTask.Result;
 
-                var response = await client.PostAsync(url, reqBody);
-
-                var resBody = await response.Content.ReadAsStringAsync();
-
-                jsonResponse j = JsonConvert.DeserializeObject<jsonResponse>(resBody);
-                Console.WriteLine("[+] Received nonce: " + j.Nonce);
-
-                var uris = new[] { "https://login.microsoftonline.com/common/oauth2/authorize?sso_nonce=" + j.Nonce };
+                var uris = new[] { "https://login.microsoftonline.com/common/oauth2/authorize?sso_nonce=" + nonce };
 
                 foreach (var uri in uris)
                 {

